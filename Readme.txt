@@ -11,9 +11,9 @@ HOW TO RUN DOCKER IMAGE
 
 TECHNOLOGY ------------------------------------------
 - Java 17
-- Spring Boot 5, Spring REST, Spring Data at spec level
+- Spring Boot 2.6.7, Spring REST, Spring Data at spec level
 - JSR/Hibernate validation
-- gradle
+- Gradle 7.4
 
 DESIGN NOTES ------------------------------------------
 - Repository interface extends Spring Data CrudRepository to ease switching databases as instructed.
@@ -31,7 +31,6 @@ all of which is considered would have been too much for this test.
 - Concurrency tests. There should not be any concurrency bug but due to enough time already spent on the test, concurrency testing account withdraw and deposits and
 transfers is left but noted here.
 - load tests
-
 
 API USAGE ------------------------------------------
 
