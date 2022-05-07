@@ -3,7 +3,9 @@ package com.sbank.validations.transaction;
 
 import com.sbank.validations.base.ValidationTestBase;
 import org.junit.jupiter.api.Test;
+
 import java.math.BigDecimal;
+
 import static com.sbank.exception.base.ValidationMessages.MSG_INVALID_ACCOUNT_NUMBER;
 import static com.sbank.exception.base.ValidationMessages.MSG_MUST_BE_POSITIVE;
 import static java.math.BigDecimal.TEN;

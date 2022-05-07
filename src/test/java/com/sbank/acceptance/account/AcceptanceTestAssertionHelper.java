@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @Component
-public class TestHelper {
+public class AcceptanceTestAssertionHelper {
 
     @Autowired
     MockedInternatioalTransferListener swiftMessageListener;

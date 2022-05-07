@@ -6,9 +6,13 @@ import com.sbank.controller.request.InternationalTransferRequest;
 import com.sbank.controller.request.NewAccountRequest;
 import com.sbank.domain.Account;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
 import static com.sbank.exception.base.ValidationMessages.FIELD_BALANCE;
 import static com.sbank.exception.base.ValidationMessages.MSG_ACCOUNT_BALANCE_INSUFFICIENT;
 import static java.math.BigDecimal.TEN;
@@ -30,7 +34,7 @@ class InternationalTransferTest extends AcceptanceTestBase {
 				HttpMethod.PATCH, new HttpEntity(internationalTransferRequest), ApiError[].class);
 
 		//then
-		testHelper.assertStatusAndMessageAndField(response, BAD_REQUEST, MSG_ACCOUNT_BALANCE_INSUFFICIENT, FIELD_BALANCE);
+		acceptanceTestAssertionHelper.assertStatusAndMessageAndField(response, BAD_REQUEST, MSG_ACCOUNT_BALANCE_INSUFFICIENT, FIELD_BALANCE);
 	}
 
 	@Test
@@ -47,10 +51,10 @@ class InternationalTransferTest extends AcceptanceTestBase {
 				HttpMethod.PATCH, new HttpEntity(internationalTransferRequest), BigDecimal.class);
 
 		//then
-		testHelper.assertResponseBody(response, ZERO);
+		acceptanceTestAssertionHelper.assertResponseBody(response, ZERO);
 		assertThat(accountRepo.findById(sourceAccount.getAccountNo()).get().getBalance()).isEqualTo(ZERO);
 
-		testHelper.assertMessageReceivedBySwift(internationalTransferRequest);
+		acceptanceTestAssertionHelper.assertMessageReceivedBySwift(internationalTransferRequest);
 	}
 
 
@@ -66,10 +70,10 @@ class InternationalTransferTest extends AcceptanceTestBase {
 				HttpMethod.PATCH, new HttpEntity(internationalTransferRequest), BigDecimal.class);
 
 		//then
-		testHelper.assertResponseBody(response, TEN);
+		acceptanceTestAssertionHelper.assertResponseBody(response, TEN);
 		assertThat(accountRepo.findById(sourceAccount.getAccountNo()).get().getBalance()).isEqualTo(TEN);
 
-		testHelper.assertMessageReceivedBySwift(internationalTransferRequest);
+		acceptanceTestAssertionHelper.assertMessageReceivedBySwift(internationalTransferRequest);
 	}
 
 }

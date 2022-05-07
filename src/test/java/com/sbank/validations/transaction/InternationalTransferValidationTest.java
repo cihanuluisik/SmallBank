@@ -4,6 +4,7 @@ package com.sbank.validations.transaction;
 import com.sbank.controller.request.InternationalTransferRequest;
 import com.sbank.validations.base.ValidationTestBase;
 import org.junit.jupiter.api.Test;
+
 import static com.sbank.exception.base.ValidationMessages.MSG_INVALID_ACCOUNT_NUMBER;
 import static com.sbank.exception.base.ValidationMessages.MSG_MUST_NOT_BE_EMPTY;
 import static java.math.BigDecimal.TEN;

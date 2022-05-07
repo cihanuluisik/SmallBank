@@ -7,13 +7,11 @@ import com.sbank.domain.Account;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 
 import static com.sbank.exception.base.ValidationMessages.MSG_ACCOUNT_NOT_FOUND;
-import static com.sbank.exception.base.ValidationMessages.MSG_INVALID_ACCOUNT_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -25,11 +23,11 @@ class AccountDeletionTest extends AcceptanceTestBase {
 		accountRepo.deleteAll();
 
 		//when
-		ResponseEntity<ApiError[]> result = restTemplate.exchange(getFullUri() + "/100" ,
+		ResponseEntity<ApiError[]> responseEntity = restTemplate.exchange(getFullUri() + "/100" ,
 				HttpMethod.DELETE, null, ApiError[].class);
 
 		//then
-		testHelper.assertStatusAndMessage(result, NOT_FOUND, MSG_ACCOUNT_NOT_FOUND);
+		acceptanceTestAssertionHelper.assertStatusAndMessage(responseEntity, NOT_FOUND, MSG_ACCOUNT_NOT_FOUND);
 	}
 
 	@Test

@@ -5,6 +5,8 @@ public final class ValidationMessages {
     // fields
     public final static String FIELD_ACCOUNT = "accountNo";
     public final static String FIELD_BALANCE = "balance";
+    public final static String FIELD_NAME = "name";
+    public final static String FIELD_ADDRESS = "address";
 
     // validations error messages
     public final static String MSG_INVALID_ACCOUNT_NUMBER = "Invalid Account Number";

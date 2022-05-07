@@ -4,7 +4,9 @@ package com.sbank.validations;
 import com.sbank.validations.base.ValidationTestBase;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+
 import javax.validation.ConstraintViolationException;
+
 import static com.sbank.exception.base.ValidationMessages.MSG_INVALID_ACCOUNT_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

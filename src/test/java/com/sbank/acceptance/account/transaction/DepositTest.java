@@ -5,7 +5,9 @@ import com.sbank.controller.error.ApiError;
 import com.sbank.controller.request.NewAccountRequest;
 import com.sbank.domain.Account;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 
@@ -25,7 +27,7 @@ class DepositTest extends AcceptanceTestBase {
 				HttpMethod.PATCH, new HttpEntity<BigDecimal>(BigDecimal.TEN), ApiError[].class);
 
 		//then
-		testHelper.assertStatusAndMessage(result, NOT_FOUND, MSG_ACCOUNT_NOT_FOUND);
+		acceptanceTestAssertionHelper.assertStatusAndMessage(result, NOT_FOUND, MSG_ACCOUNT_NOT_FOUND);
 	}
 
 
@@ -39,7 +41,7 @@ class DepositTest extends AcceptanceTestBase {
 				HttpMethod.PATCH, new HttpEntity<BigDecimal>(BigDecimal.TEN), BigDecimal.class);
 
 		//then
-		testHelper.assertResponseBody(response,new BigDecimal("20") );
+		acceptanceTestAssertionHelper.assertResponseBody(response,new BigDecimal("20") );
 		assertThat(accountRepo.findById(account1.getAccountNo()).get().getBalance()).isEqualTo(new BigDecimal("20"));
 	}
 

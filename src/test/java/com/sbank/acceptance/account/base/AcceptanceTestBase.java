@@ -1,14 +1,12 @@
 package com.sbank.acceptance.account.base;
 
-import com.sbank.acceptance.account.TestHelper;
+import com.sbank.acceptance.account.AcceptanceTestAssertionHelper;
 import com.sbank.domain.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.data.repository.CrudRepository;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AcceptanceTestBase {
@@ -26,6 +24,6 @@ public class AcceptanceTestBase {
 	protected TestRestTemplate restTemplate;
 
 	@Autowired
-	protected TestHelper testHelper;
+	protected AcceptanceTestAssertionHelper acceptanceTestAssertionHelper;
 
 }

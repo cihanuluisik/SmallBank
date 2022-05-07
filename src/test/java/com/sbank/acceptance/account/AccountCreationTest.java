@@ -5,7 +5,10 @@ import com.sbank.controller.error.ApiError;
 import com.sbank.controller.request.NewAccountRequest;
 import com.sbank.domain.Account;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -22,14 +25,15 @@ class AccountCreationTest extends AcceptanceTestBase {
 		NewAccountRequest newAccountRequest = new NewAccountRequest(" ", " ", BigDecimal.ZERO);
 
 		// when
-		ResponseEntity<ApiError[]> result = restTemplate.postForEntity(getFullUri(), newAccountRequest, ApiError[].class);
+		ResponseEntity<ApiError[]> responseEntity = restTemplate.postForEntity(getFullUri(), newAccountRequest, ApiError[].class);
 
 		// then
-		assertThat(result.getStatusCode()).isEqualTo(BAD_REQUEST);
-		assertThat(result.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
-		ApiError[] apiErrors = result.getBody();
-		assertThat(Arrays.stream(apiErrors).map(ApiError::getField)).containsExactlyInAnyOrder("name", "address","balance");
-		assertThat(Arrays.stream(apiErrors).map(ApiError::getMessage).collect(Collectors.toSet())).containsExactlyInAnyOrder(MSG_MUST_NOT_BE_EMPTY, MSG_MUST_BE_POSITIVE);
+		assertThat(responseEntity.getStatusCode()).isEqualTo(BAD_REQUEST);
+		assertThat(responseEntity.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
+		ApiError[] apiErrors = responseEntity.getBody();
+		assertThat(Arrays.stream(apiErrors).map(ApiError::getField)).containsExactlyInAnyOrder(FIELD_NAME, FIELD_BALANCE,FIELD_ADDRESS);
+		assertThat(Arrays.stream(apiErrors).map(ApiError::getMessage).collect(Collectors.toSet()))
+				.containsExactlyInAnyOrder(MSG_MUST_NOT_BE_EMPTY, MSG_MUST_BE_POSITIVE);
 	}
 
 	@Test
