@@ -16,7 +16,7 @@ TECHNOLOGY ------------------------------------------
 - Gradle 7.4
 
 DESIGN NOTES ------------------------------------------
-- All designed with SOLID, YAGNI, KISS principles.
+- Code has been designed and implemented with functional style OOP and basic principles like OOP and SOLID, YAGNI, KISS, DRY.
 - Repository interface extends Spring Data CrudRepository to ease switching databases as instructed.
 - Repository saves are atomic and thread safe. At the edge, multi account transfers repeatedly tries to acquire
 the locks of involved entities before operation.
