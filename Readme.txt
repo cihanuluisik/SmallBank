@@ -16,20 +16,23 @@ TECHNOLOGY ------------------------------------------
 - Gradle 7.4
 
 DESIGN NOTES ------------------------------------------
+- All designed with SOLID, YAGNI, KISS principles.
 - Repository interface extends Spring Data CrudRepository to ease switching databases as instructed.
-- Repository saves are atomic and thread safe.
-- At the edge, multi account transfers repeatedly attempts to lock two accounts before operation.
-- Not required in any API, so transaction history on accounts not kept separate.
-- Domain classes are simplified. Like account only includes name and address skipping all date fields. Like wise international
+- Repository saves are atomic and thread safe. At the edge, multi account transfers repeatedly tries to acquire
+the locks of involved entities before operation.
+- Transaction history on accounts have not been kept separately.
+- Domain classes are simplified. Like, account only includes name and address skipping all date fields. Like wise international
 account number fields are reduced to IBAN and SWIFT CODE only.
 - Accounts' currency unit AED and thats the only allowed one. Being not required, currency unit is hidden everywhere.
 
 TODOS ------------------------------------------
 - Repo layer should return copies of objects to separate the layer. But if done, object level locking will break.
-If done, one solution to go further might be a lock manager locking the accounts during monetary operations
-all of which is considered would have been too much for this test.
-- Concurrency tests. There should not be any concurrency bug but due to enough time already spent on the test, concurrency testing account withdraw and deposits and
-transfers is left but noted here.
+If done, one solution to go further might be a lock manager locking entities during monetary operations
+all of which is considered 'too much' for this test.
+- Concurrency tests. There should not be any concurrency bug but due to enough time already spent on the test, concurrency
+testing account withdraw and deposits and transfers is left but noted here.
+- 'Record updated after fetch' issue which could have been fixed by employing a date field for versioning the entities
+to implement optimistic locking at API call level, has been left but noted here.
 - load tests
 
 API USAGE ------------------------------------------

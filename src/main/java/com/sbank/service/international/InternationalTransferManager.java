@@ -11,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Component
 public class InternationalTransferManager {
 
-    List<InternationalTransferEventListener> subscribers = new CopyOnWriteArrayList<>();
+    private final List<InternationalTransferEventListener> subscribers = new CopyOnWriteArrayList<>();
 
     public void subscribe(InternationalTransferEventListener listener){
         subscribers.add(listener);
